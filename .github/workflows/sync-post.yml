@@ -62,6 +62,4 @@ jobs:
         run: git pull --rebase origin main
 
       - name: Push changes to remote
-        run: |
-          git remote set-url origin https://${{ secrets.GH_TOKEN }}@github.com/${{ secrets.GH_USER }}/${{ secrets.GH_PROJECT_NAME }}.git
-          git push
+        run: git push
