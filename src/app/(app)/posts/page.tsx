@@ -103,7 +103,7 @@ export default function Posts() {
 					<CoverSwitch />
 				</div>
 				<p className="mt-4 mb-6 text-base text-zinc-600 dark:text-zinc-400">
-					记录工作，学习，生活中的所见所闻所想，主要分享领域 <b>前端开发</b>
+					我会记录工作，学习，生活中的所见所闻所想，主要分享领域 <b>前端开发</b>
 					，偶尔也会记录 <b>其他内容</b>
 				</p>
 			</header>

@@ -43,3 +43,4 @@ reference ：
 
 1. https://devv.ai/search?threadId=drssm68cp1j4
 2. https://www.npmjs.com/package/@commitlint/config-conventional
+3. https://www.conventionalcommits.org/en/v1.0.0/
