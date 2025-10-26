@@ -19,7 +19,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start -p 3003",
-		"start:static": "serve -s out -l 3003",
+		"start:static": "npx serve -s out -l 3003",
 		"lint": "eslint --ext .ts,.js,.jsx,.tsx --fix . ",
 		"lint-staged": "lint-staged",
 		"sync-post": "node ./scripts/sync-post.js",

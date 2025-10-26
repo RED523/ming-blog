@@ -4,6 +4,7 @@ import { SparkleIcon } from '@/assets';
 import { SocialLink } from '@/components/links/SocialLink';
 import siteMetadata from '@/config/site';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Balancer from 'react-wrap-balancer';
 
 function Designer() {
@@ -91,13 +92,13 @@ export function Headline() {
 					delay: 0.2
 				}}
 			>
-				<img
+				<Image
 					src="https://skillicons.dev/icons?i=js,html,css,nodejs,tailwind,ts,sass,react,vue,nextjs)"
 					alt="skills icons"
+					width={800}
+					height={100}
+					className="mb-4 cursor-pointer w-4/5 h-auto"
 					unoptimized
-					width="80%"
-					height="auto"
-					className="mb-4 cursor-pointer"
 				/>
 			</motion.div>
 			{/* 引入一张图片 */}
@@ -113,13 +114,13 @@ export function Headline() {
 					delay: 0.2
 				}}
 			>
-				<img
+				<Image
 					src="https://raw.githubusercontent.com/RED523/RED523/refs/heads/output/github-contribution-grid-snake.svg"
 					alt="github contribution grid snake animation"
+					width={800}
+					height={100}
+					className="mb-4 cursor-pointer w-4/5 h-auto"
 					unoptimized
-					width="80%"
-					height="auto"
-					className="mb-4 cursor-pointer"
 				/>
 			</motion.div>
 		</div>
