@@ -41,9 +41,6 @@ export default function ProjectsPage() {
 				<h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
 					我的项目
 				</h1>
-				<p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-					这是我在开发和维护的项目，有<b>公司项目</b>，也有<b>个人项目</b>
-				</p>
 			</header>
 			<div className="mt-16 sm:mt-20">
 				<Projects />

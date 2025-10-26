@@ -4,37 +4,22 @@
         <description><![CDATA[我是幸运的蜗牛，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运]]></description>
         <link>https://keteng.cn</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 04 Oct 2025 16:03:52 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 25 Oct 2025 16:45:12 GMT</lastBuildDate>
         <atom:link href="https://keteng.cn/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
-            <title><![CDATA[VSCode 中使用 Snippets 设置常用代码块]]></title>
-            <link>https://keteng.cn/posts/post-11</link>
-            <guid isPermaLink="true">https://keteng.cn/posts/post-11</guid>
+            <title><![CDATA[23]]></title>
+            <link>https://keteng.cn/posts/post-2</link>
+            <guid isPermaLink="true">https://keteng.cn/posts/post-2</guid>
         </item>
         <item>
-            <title><![CDATA[理解 ECMASript中的迭代器]]></title>
-            <link>https://keteng.cn/posts/post-10</link>
-            <guid isPermaLink="true">https://keteng.cn/posts/post-10</guid>
+            <title><![CDATA[3]]></title>
+            <link>https://keteng.cn/posts/post-3</link>
+            <guid isPermaLink="true">https://keteng.cn/posts/post-3</guid>
         </item>
         <item>
-            <title><![CDATA[自我介绍]]></title>
-            <link>https://keteng.cn/posts/post-12</link>
-            <guid isPermaLink="true">https://keteng.cn/posts/post-12</guid>
-        </item>
-        <item>
-            <title><![CDATA[使用 ssh 获取代码]]></title>
-            <link>https://keteng.cn/posts/post-13</link>
-            <guid isPermaLink="true">https://keteng.cn/posts/post-13</guid>
-        </item>
-        <item>
-            <title><![CDATA[国庆回家]]></title>
-            <link>https://keteng.cn/posts/post-15</link>
-            <guid isPermaLink="true">https://keteng.cn/posts/post-15</guid>
-        </item>
-        <item>
-            <title><![CDATA[No title]]></title>
-            <link>https://keteng.cn/posts/.DS_Store</link>
-            <guid isPermaLink="true">https://keteng.cn/posts/.DS_Store</guid>
+            <title><![CDATA[1]]></title>
+            <link>https://keteng.cn/posts/post-1</link>
+            <guid isPermaLink="true">https://keteng.cn/posts/post-1</guid>
         </item>
         <item>
             <title><![CDATA[关于我]]></title>
@@ -42,9 +27,9 @@
             <guid isPermaLink="true">https://keteng.cn/posts/about</guid>
         </item>
         <item>
-            <title><![CDATA[代码测试]]></title>
-            <link>https://keteng.cn/posts/post-14</link>
-            <guid isPermaLink="true">https://keteng.cn/posts/post-14</guid>
+            <title><![CDATA[4]]></title>
+            <link>https://keteng.cn/posts/post-4</link>
+            <guid isPermaLink="true">https://keteng.cn/posts/post-4</guid>
         </item>
     </channel>
 </rss>
