@@ -1,0 +1,130 @@
+---
+title: “Script error.”的产生原因和解决办法
+date: 2025-10-26T08:37:13Z
+slug: post-6
+author: RED523：https://github.com/RED523
+tags: ["跨域","脚本错误"]
+---
+
+## 背景
+
+在 script 标签中加载托管到第三方 cdn 上的资源的时候，可能会出现 script error. 的报错。由于该错误不提供完整的报错信息（错误堆栈），问题的排查往往无从下手。
+
+## script error. 生成的原因
+
+这个错误也叫做“跨域错误”，一般情况会发生在 script 标签中加载托管到第三方 cdn 上的资源的时候，常用的场景是在 cdn 上托管 js资源。
+
+方便大家理解，假设下面 html 页面部署在 [http://127.0.0.1:5500/](http://127.0.0.1:5500/) （可以在 vscode 使用 live server 生成）域名下：
+
+```javascript
+<!doctype html>
+<html>
+
+<head>
+  <title>Test page in http://test.com</title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@v1.0.0/js/app.js"></script>
+  <script>
+    window.onerror = function (message, url, line, column, error) {
+      console.log(message, url, line, column, error);
+    }
+    foo();
+  </script>
+</body>
+
+</html>
+```
+
+假设 foo 方法里面调用了一个未定义的 bar 方法
+
+```javascript
+function foo() {
+  bar(); // ReferenceError: bar is not a function
+}
+```
+
+运行页面之后，捕获到的异常如下
+
+```javascript
+Script error.  0 0 null
+```
+
+其实这边并不是 JavaScript 的一个 bug，这是浏览器安全策略的一个表现，浏览器会刻意隐藏其他域的 js 资源抛出的错误，这样可以有效避免敏感信息无意中被不可控的第三方脚本捕获。因此，浏览器只允许同域下的脚本捕获到具体的错误信息，而其他脚本只知道发生了错误，但是不知道错误的具体细节。
+
+## 解决方式
+
+### 解法一：开启跨域资源共享 CORS
+
+为捕获跨域 JavaScript 的错误，可以执行以下两个步骤
+
+1. 步骤 1：添加 crossorigin="anonymous 属性
+
+<script src="https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@v1.0.0/js/app.js" crossorigin="anonymous"></script>
+
+此步骤的作用是告知浏览器以匿名的方式获取目标脚本。也就是请求资源的时候不会向服务器发送潜在的用户
+
+身份信息（cookie，HTTP 证书等）
+
+1. 添加跨域 HTTP 请求头
+
+```
+Access-Control-Allow-Origin: *  // 或者 Access-Control-Allow-Origin: http://127.0.0.1:5500/
+```
+
+说明：大部分主流CDN默认添加了Access-Control-Allow-Origin属性。以下是 jsdelivr 的示例：
+
+![img](https://cdn.nlark.com/yuque/0/2025/png/22221386/1761288486005-1918f4cf-7509-4672-a84d-b320abe3a36d.png)
+
+完成上述两个步骤之后，就可以通过 window.onerror 捕获跨域 js 文件的错误了。回到前面的案例，重新
+
+运行页面之后，捕获到的结果是:
+
+```
+Uncaught ReferenceError: bar is not defined, https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@v1.0.0/js/app.js, 2, 3, ReferenceError: bar is not defined
+```
+
+### 解法二（可选）：使用 try catch
+
+如果难以在 HTTP 请求头中添加跨域属性，可以使用 try catch 的方式
+
+之前的案例，添加 try catch
+
+```javascript
+<!doctype html>
+<html>
+<head>
+  <title>Test page in http://test.com</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@v1.0.0/js/app.js"></script>
+  <script>
+  window.onerror = function (message, url, line, column, error) {
+    console.log(message, url, line, column, error);
+  }
+  try {
+    foo(); // 调用app.js中定义的foo方法
+  } catch (e) {
+    console.log(e);
+    throw e; // 重新抛出错误以触发全局window.onerror
+  }
+  </script>
+</body>
+</html>
+```
+
+运行页面之后，捕获到的结果是:
+
+![img](https://cdn.nlark.com/yuque/0/2025/png/22221386/1761290364357-49f502f1-3aa0-4c69-8819-c5922008fc65.png)
+
+可见，try catch 中的 log 语句捕获到了“完整”的报错信息，window.onerror 也可以捕获完整的信息。尽管这种方式也可以捕获完整的信息，但推荐采用解法 1。
+
+
+
+## 留个疑问
+
+错误代码最终是来自跨域的 js 文件，那么有人知道，window.onerror里面，ur l参数，为什么不是打印  https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@v1.0.0/js/app.js ？
+
+---
+此文自动发布于：<a href="https://github.com/RED523/ming-blog/issues/6" target="_blank">github issues</a>
