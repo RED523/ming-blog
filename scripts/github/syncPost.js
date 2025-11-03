@@ -58,6 +58,7 @@ function main() {
 			let newCount = 0;
 			let updateCount = 0;
 			let skipCount = 0;
+			let deletedCount = 0;
 
 			console.log('data---->', data);
 			// 遍历所有issues数组
@@ -96,11 +97,29 @@ function main() {
 					console.log(error);
 				}
 			}
+
+			// 删除 GitHub 上已删除的文章对应的本地文件
+			try {
+				const validFileNames = new Set(
+					data.map((item) => `post-${item.number}.mdx`)
+				);
+				const allFiles = fs.readdirSync(filePath);
+				for (const file of allFiles) {
+					if (/^post-\d+\.mdx$/.test(file) && !validFileNames.has(file)) {
+						fs.removeSync(path.join(filePath, file));
+						console.log('删除成功--->', path.join(filePath, file));
+						deletedCount++;
+					}
+				}
+			} catch (error) {
+				console.log('删除本地已失效文章失败--->', error);
+			}
 			console.log('========== 同步结果 ==========');
 			console.log(`🔢 总文章数: ${data.length}`);
 			console.log(`🆕 新增: ${newCount} 篇`);
 			console.log(`🔄 更新: ${updateCount} 篇`);
 			console.log(`🎁 跳过: ${skipCount} 篇`);
+			console.log(`🗑️ 删除: ${deletedCount} 篇`);
 			console.log(`✅ 成功: ${successCount}/${data.length}`);
 			console.log('==============================');
 		});
