@@ -124,8 +124,8 @@ const Page = ({ params }: { params: TypeParams }) => {
 									</time>
 									<Separator orientation="vertical" />
 									<span className="mb-1 text-xs text-gray-600 flex items-center">
-										<HourglassIcon className="mr-2" />{' '}
-										{Math.ceil(post.readingTime?.minutes)} 分钟
+										<HourglassIcon className="mr-2" /> 阅读
+										{Math.ceil(post.readingTime?.minutes)}分钟
 									</span>
 								</div>
 								<div className="flex w-full justify-center gap-2 mt-2">
