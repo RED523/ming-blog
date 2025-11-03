@@ -120,7 +120,7 @@ const Page = ({ params }: { params: TypeParams }) => {
 										dateTime={post.date}
 										className="mb-1 text-xs text-gray-600"
 									>
-										{dayjs(post.date).format('YYYY-MM-DD')}
+										{dayjs(post.date).format('YYYY-MM-DD HH:mm:ss')}
 									</time>
 									<Separator orientation="vertical" />
 									<span className="mb-1 text-xs text-gray-600 flex items-center">
