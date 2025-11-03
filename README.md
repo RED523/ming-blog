@@ -1,46 +1,28 @@
-npx husky add .husky/pre-commit "npx lint-staged"This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 项目简介
 
-[中文](./README-zh_CN.md)
+### 预览
+访问地址：[`https://keteng-blog.netlify.app/`](https://keteng-blog.netlify.app/)
 
-## Getting Started
+![Demo 动画](/public/demo.gif)
 
-First, run the development server:
+这是一个基于 Next.js 打造的个人博客网站，支持以 GitHub Issues 作为内容源，自动同步为本地 MDX 文章并生成静态站点。项目使用 Tailwind CSS 与一套可复用 UI 组件，内置 RSS 生成功能与基础 SEO 配置，适合个人技术写作与内容归档。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 主要特性
+- **技术栈**: Next.js 14、Tailwind CSS、Framer Motion、Contentlayer
+- **内容来源**: 通过脚本从 GitHub Issues 同步为 `data/blog/*.mdx`
+- **自动清理**: 当 GitHub 上文章被删除时，自动删除本地对应 MDX 文件
+- **内容格式**: 支持 MDX、代码高亮、目录、标签等
+- **产出**: 可导出静态页面，支持 RSS 订阅
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 快速上手
+1. 安装依赖并启动开发：
+   - `npm run dev` 启动开发环境
+   - `npm run build` 构建生产环境
+   - `npm run start` 本地运行生产构建（默认端口 3003）
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. 同步文章与生成 RSS：
+   - `npm run sync-post`：从 GitHub Issues 拉取并生成/更新/删除 `data/blog` 下的文章
+   - `npm run generate-rss`：生成 RSS 输出
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## commit standard
-
-reference ：
-
-1. https://devv.ai/search?threadId=drssm68cp1j4
-2. https://www.npmjs.com/package/@commitlint/config-conventional
-3. https://www.conventionalcommits.org/en/v1.0.0/
+3. 静态产物本地预览：
+   - `npm run start:static` 在本地以静态站点方式预览 `out` 目录内容
