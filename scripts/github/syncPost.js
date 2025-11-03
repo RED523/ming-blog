@@ -4,7 +4,6 @@ require('dotenv').config();
 const GitHub = require('github-api');
 const fs = require('fs-extra');
 const path = require('path');
-// console.log(process.env, ' process.env');
 const { GH_TOKEN, GH_USER, GH_PROJECT_NAME } = process.env;
 
 const gh = new GitHub({
@@ -26,10 +25,12 @@ function closeImgTag(htmlString) {
 	return htmlString.replace(imgTagRegex, '<img$1 />');
 }
 
-// get blog list
+// 获取博客列表实例
 const issueInstance = gh.getIssues(GH_USER, GH_PROJECT_NAME);
+
+// 生成mdx文件内容
 function generateMdx(issue, fileName) {
-	console.log(issue, 'issue');
+	console.log('issue---->', issue);
 	const { title, labels, created_at, body, html_url, user } = issue;
 	return `---
 title: ${title.trim()}
@@ -49,34 +50,59 @@ ${closeImgTag(body.replace(/<br \/>/g, '\n'))}
 function main() {
 	const filePath = path.resolve(__dirname, blogOutputPath);
 	// 只查询自己的issues，避免别人创建的也更新到博客
-	const creators = [
-		'chaseFunny',
-		'coderPerseus',
-		'RED523',
-		'zhaozhongming',
-		'RED'
-	]; // 添加多个creator
+	const creators = ['RED523'];
 	fs.ensureDirSync(filePath);
-	fs.emptyDirSync(filePath);
 	creators.forEach((name) => {
 		issueInstance.listIssues({ creator: name }).then(({ data }) => {
 			let successCount = 0;
+			let newCount = 0;
+			let updateCount = 0;
+			let skipCount = 0;
+
+			console.log('data---->', data);
+			// 遍历所有issues数组
 			for (const item of data) {
 				try {
-					const fileName = `post-${item.number}`;
-					const content = generateMdx(item, fileName);
-					fs.writeFileSync(`${filePath}/${fileName}.mdx`, content);
-					console.log(`${filePath}/${fileName}.mdx`, 'success');
+					const fileName = `post-${item.number}`; // 文件名
+					const content = generateMdx(item, fileName); // 生成mdx文件内容
+					const fullPath = `${filePath}/${fileName}.mdx`; // 文件全路径
+
+					// 检查文件是否存在
+					const fileExists = fs.existsSync(fullPath);
+
+					if (fileExists) {
+						// 文件存在，检查内容是否有变化
+						const existingContent = fs.readFileSync(fullPath, 'utf8');
+						if (existingContent === content) {
+							console.log('无变化，跳过--->', `${filePath}/${fileName}.mdx`);
+							skipCount++;
+							successCount++;
+							continue;
+						} else {
+							// 内容有变化，更新文件
+							fs.writeFileSync(fullPath, content);
+							console.log('更新成功--->', `${filePath}/${fileName}.mdx`);
+							updateCount++;
+						}
+					} else {
+						// 文件不存在，创建新文件
+						fs.writeFileSync(fullPath, content);
+						console.log('创建成功--->', `${filePath}/${fileName}.mdx`);
+						newCount++;
+					}
+
 					successCount++;
 				} catch (error) {
 					console.log(error);
 				}
 			}
-			if (successCount === data.length) {
-				console.log('文章全部同步成功！', data.length);
-			} else {
-				console.log('文章同步失败！失败数量=', data.length - successCount);
-			}
+			console.log('========== 同步结果 ==========');
+			console.log(`🔢 总文章数: ${data.length}`);
+			console.log(`🆕 新增: ${newCount} 篇`);
+			console.log(`🔄 更新: ${updateCount} 篇`);
+			console.log(`🎁 跳过: ${skipCount} 篇`);
+			console.log(`✅ 成功: ${successCount}/${data.length}`);
+			console.log('==============================');
 		});
 	});
 }
