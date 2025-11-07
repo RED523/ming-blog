@@ -1,0 +1,145 @@
+---
+title: 彻底弄懂Vue的作用域插槽
+date: 2025-11-07T06:50:33Z
+slug: post-12
+author: RED523：https://github.com/RED523
+tags: ["Vue","插槽"]
+---
+
+Vue 中有具名插槽，作用域插槽。具名插槽的话比较简单，作用域插槽感觉很多人对它的用法不是很熟悉，今天我就结合一个简单案例，详细地讲解作用域插槽的用法。
+
+首先，自问下，什么情况下会使用到作用域插槽（嗯，想几分钟吧）？
+答案是：**父组件需要使用子组件中才有的数据的时候**。这种情况下会使用到作用域插槽。
+看下面代码：
+首先定义两个组件，具体的注释我已经写在代码中了
+父组件：
+
+```vue
+<!-- 父组件index.vue -->
+<template>
+    <div>
+        <ChildVue :list="arr"></ChildVue>
+    </div>
+</template>
+
+<script lang="ts">
+import ChildVue from "./child.vue"; // 导入子组件
+
+export default {
+    components: {
+        ChildVue,
+    },
+    data() {
+        return {
+            arr: [
+                {name: '孙悟空', avatar: 'https://x0.ifengimg.com/ucms/2020_45/C8433371E18CA48DAD8782794D665A7075FD481D_w640_h593.jpg'},
+                {name: '琪琪', avatar: 'https://p0.itc.cn/q_70/images01/20230521/04868a5298bd43b4af555f7ff2a17052.png'},
+                {name: '龟仙人', avatar: 'https://k.sinaimg.cn/n/sinacn10114/246/w640h406/20191003/5717-ifmectk8055739.png/w700d1q75cms.jpg'},
+            ]
+        }
+    }
+}
+</script>
+
+<style lang="less"></style>
+```
+
+子组件：
+
+```vue
+<!-- 子组件child.vue -->
+<template>
+    <div>
+        <div v-for="(item, index) in list" :key="index">
+             <div>{{ item.name }}</div>
+             <div>--------</div>
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
+export default {
+    props: {
+        list: Array, // 定义父组件传过来的值
+    },
+}
+</script>
+
+<style lang="less"></style>
+```
+
+实际的效果：
+![在这里插入图片描述](https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@main/images/20251107143900914.png)
+但是，我想要的效果是：每个名字后面都有对应的照片。现在，使用作用域插槽就可以实现（看新增代码）。
+
+```vue
+<!-- 父组件index.vue -->
+<template>
+    <div>
+        <ChildVue :list="arr">
+            <!-- 新增代码 -->
+            <template v-slot="slotProps">
+                <img :src="slotProps.row.avatar" alt="" width="200px" /> 
+            </template>   
+            
+            <!-- 也可以使用解构 -->
+            <!-- <template v-slot="{ row }">
+                <img :src="row.avatar" alt="" width="200px" />
+            </template>   -->
+        </ChildVue>
+    </div>
+</template>
+
+<script lang="ts">
+import ChildVue from "./child.vue"; // 导入子组件
+
+export default {
+    components: {
+        ChildVue,
+    },
+    data() {
+        return {
+            arr: [
+                {name: '孙悟空', avatar: 'https://x0.ifengimg.com/ucms/2020_45/C8433371E18CA48DAD8782794D665A7075FD481D_w640_h593.jpg'},
+                {name: '琪琪', avatar: 'https://p0.itc.cn/q_70/images01/20230521/04868a5298bd43b4af555f7ff2a17052.png'},
+                {name: '龟仙人', avatar: 'https://k.sinaimg.cn/n/sinacn10114/246/w640h406/20191003/5717-ifmectk8055739.png/w700d1q75cms.jpg'},
+            ]
+        }
+    }
+}
+</script>
+
+<style lang="less"></style>
+```
+
+```vue
+<!-- 子组件child.vue -->
+<template>
+    <div>
+        <div v-for="(item, index) in list" :key="index">
+             <div>{{ item.name }}</div>
+             
+             <!-- 插槽（想显示什么就显示什么），这里绑定一个对象，键「row」可以随便起一个名字，值「index」就是要回传到父组件中的 -->
+             <slot :row="item"></slot> <!-- 新增代码 -->
+             <div>--------</div>
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
+export default {
+    props: {
+        list: Array, // 定义父组件传过来的值
+    },
+}
+</script>
+
+<style lang="less"></style>
+```
+
+注：
+父组件中的 slotProps，可以自定义一个名称，它表示一个对象，其中键就是子组件中绑定的 row，值就是父组件要使用的值。
+最后的效果图：![在这里插入图片描述](https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@main/images/20251107143901107.png)
+
+---
+此文自动发布于：<a href="https://github.com/RED523/ming-blog/issues/12" target="_blank">github issues</a>
