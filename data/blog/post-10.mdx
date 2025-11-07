@@ -1,0 +1,159 @@
+---
+title: 一文简单入门 Axios
+date: 2025-11-07T06:17:24Z
+slug: post-10
+author: RED523：https://github.com/RED523
+tags: ["http","axios","promise"]
+---
+
+Axios 是一个流行的基于 Promise 的请求，用于在浏览器或者 Node 环境中进行 HTTP 请求。它提供了简单易用的 API，可以发送各类请求，比如：GET、POST、PUT、DELETE等，并处理响应数据。Axios 在前端项目中被优先选择的概率很高，下面就用实际的例子来简单熟悉它，通过编写接口并且调用 Apifox 生成的 Mock 数据。
+
+# 安装 Axios
+
+要安装 Axios，前置条件是需要先下载 [Node](https://nodejs.org/en/download)，然后在终端执行命令（以下都是以 npm 为例）
+
+```bash
+npm install axios
+```
+
+上面这种方式是局部安装的，会安装在项目的`node_modules`文件夹下。 我也比较推荐这种方式，因为该方式会将全局的 Axios 依赖和项目中的依赖隔离开，确保每个项目的 axios 依赖有自己的版本控制和依赖。当然如果想全局安装也是可以的，可以执行下面的命令：
+
+```bash
+npm i -g axios
+```
+
+安装完成后，你可以新建一个`.js` 的文件，用来发起 HTTP 请求，基本结构如下：
+
+```javascript
+import $http from 'axios'
+
+// Mock服务，基础路径
+const baseUrl = 'https://m1.apifoxmock.com/m1/593188-0-default';
+
+// 查询指定 id 的宠物
+$http.get(`${baseUrl}/pet/1`).then(res => {
+  console.log('查询---》', res.data);
+}).catch(err => {
+  console.log('查询---》', err);
+})
+
+// 新增
+$http.post(`${baseUrl}/pet`, {
+  name: '太牛了',
+  status: 'sold'
+}).then(res => {
+  console.log('新增---》', res.data);
+}).catch(err => {
+  console.log('新增---》', err);
+})
+
+// 修改
+$http.put(`${baseUrl}/pet`, {
+  name: 'test',
+}).then(res => {
+  console.log('修改---》', res.data);
+}).catch(err => {
+  console.log('修改---》', err);
+})
+
+// 删除
+$http.delete(`${baseUrl}/pet/0`).then(res => {
+  console.log('删除---》', res.data);
+}).catch(err => {
+  console.log('删除---》', err);
+})
+```
+
+# 接口 Mock
+
+为了方便测试，使用 Apifox 中的 Mock数据
+
+![image-20251107113304248](https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@main/images/20251107113304358.png)
+
+# 发起请求
+
+发起请求前，首先需要导入 Axios 库，然后可选的设置基础的 Mock 地址
+
+```javascript
+import $http from 'axios'
+
+// Mock服务，基础路径 (到 Apifox 的云端Mock中找)
+const baseUrl = 'https://m1.apifoxmock.com/m1/593188-0-default';
+
+```
+
+## GET请求
+
+示例：
+
+```javascript
+// 查询指定 id 的宠物
+$http.get(`${baseUrl}/pet/1`).then(res => {
+  console.log('查询---》', res.data);
+}).catch(err => {
+  console.log('查询---》', err);
+})
+```
+
+响应如下：
+
+![image-20251107090341909](https://cdn.jsdelivr.net/gh/RED523/frontend-cdn@main/images/20251107090342137.png)
+
+## POST请求
+
+示例:
+
+```javascript
+// 新增
+$http.post(`${baseUrl}/pet`, {
+  name: '太牛了',
+  status: 'sold'
+}).then(res => {
+  console.log('新增---》', res.data);
+}).catch(err => {
+  console.log('新增---》', err);
+})
+```
+
+
+
+## PUT 请求
+
+示例：
+
+```javascript
+// 修改
+$http.put(`${baseUrl}/pet`, {
+  name: 'test',
+}).then(res => {
+  console.log('修改---》', res.data);
+}).catch(err => {
+  console.log('修改---》', err);
+})
+```
+
+
+
+## DELETE 请求
+
+示例：
+
+```javascript
+// 删除
+$http.delete(`${baseUrl}/pet/0`).then(res => {
+  console.log('删除---》', res.data);
+}).catch(err => {
+  console.log('删除---》', err);
+})
+```
+
+
+
+参考：
+
+- https://axios-http.com/
+
+- https://apifox.com/
+
+---
+此文自动发布于：<a href="https://github.com/RED523/ming-blog/issues/10" target="_blank">github issues</a>
