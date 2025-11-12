@@ -15,7 +15,7 @@ export const baseSiteConfig: SiteConfig = {
 	// https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
 	metadataBase: '/',
 	keywords: [
-		'幸运的蜗牛',
+		'柯腾呐',
 		'blog',
 		'前端',
 		'开发者',
