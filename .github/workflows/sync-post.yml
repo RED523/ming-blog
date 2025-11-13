@@ -59,9 +59,9 @@ jobs:
       - name: Update blog files ⛏️
         run: |
           echo "🚀 开始同步文章..."
-          pnpm run sync-post
+          pnpm run sync-post && \
           echo "✅ 文章同步完成，开始生成 RSS..."
-          git add .
+          git add . && \
           git commit -m 'chore(ci): blog sync'
 
       - name: Pull latest changes from remote
