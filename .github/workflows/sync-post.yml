@@ -61,6 +61,8 @@ jobs:
           echo "🚀 开始同步文章..."
           pnpm run sync-post && \
           echo "✅ 文章同步完成，开始生成 RSS..."
+          pnpm run generate-rss && \
+          echo "✅ RSS 生成完成"
           git add . && \
           git commit -m 'chore(ci): blog sync'
 
