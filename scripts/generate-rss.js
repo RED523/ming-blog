@@ -8,7 +8,7 @@ async function generate() {
 	const feed = new RSS({
 		title: '柯腾呐',
 		description:
-			'嘿，大家好，我是柯腾，一名工作3年多的前端开发者。在这里，我将记录我的学习笔记、项目经验、对前端技术的见解以及一些日常生活。希望通过这个平台，与更多志同道合的朋友交流，共同成长！',
+			'嘿，大家好，我是柯腾，一名前端开发者。在这里，我将记录我的学习笔记、项目经验、对前端技术的见解以及一些日常生活。希望通过这个平台，与更多志同道合的朋友交流，共同成长！',
 		site_url: 'https://keteng-blog.netlify.app',
 		feed_url: 'https://keteng-blog.netlify.app/feed.xml'
 	});
