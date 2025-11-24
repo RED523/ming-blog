@@ -8,7 +8,7 @@ const url = new URL(
 export const baseSiteConfig: SiteConfig = {
 	name: 'blog | 前端 | 开发者',
 	description:
-		'嘿，大家好，我是柯腾，一名工作3年多的前端开发者。在这里，我将记录我的学习笔记、项目经验、对前端技术的见解以及一些日常生活。希望通过这个平台，与更多志同道合的朋友交流，共同成长！',
+		'嘿，大家好，我是柯腾，一名前端程开发者。在这里，我将记录我的学习笔记、项目经验、对前端技术的见解以及一些日常生活。希望通过这个平台，与更多志同道合的朋友交流，共同成长！',
 	url: url.href, //'https://keteng.cn/',
 	// 网站预览图
 	ogImage: url.origin + '/og.png',
