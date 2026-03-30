@@ -1,6 +1,6 @@
 [build]
   command = "pnpm build"
-  publish = "out"
+  # 非静态 export 时由 @netlify/plugin-nextjs / OpenNext 接管发布目录；勿指向 out，否则无 API Route
 
 [build.environment]
   NODE_VERSION = "18"
