@@ -27,3 +27,9 @@
 
 3. 静态产物本地预览：
    - `pnpm run start:static` 在本地以静态站点方式预览 `out` 目录内容
+
+### 部署（Vercel 与页脚累计访问）
+
+- **Vercel**：在 Project → Settings → Environment Variables 中配置 `UPSTASH_REDIS_REST_URL`、`UPSTASH_REDIS_REST_TOKEN`（或从 Vercel Marketplace 绑定 Upstash Redis）。推送代码后重新部署即可。
+- **为何本地正常、线上曾 404**：仓库默认在非 Vercel 构建时使用静态导出（`out/`），不包含 `/api/*`。已在 `next.config.mjs` 中在 **Vercel 构建**（自动带 `VERCEL` 环境变量）时关闭纯静态导出，以便部署 `/api/visits`。若仍 404，确认已重新部署包含该配置的版本。
+- **仅上传 `out/` 的纯静态托管**：没有服务端 API，累计访问会显示「—」。

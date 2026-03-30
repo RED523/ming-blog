@@ -2,8 +2,9 @@ import { withContentlayer } from 'next-contentlayer';
 // import generate from './scripts/generate-rss.js';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	// 静态导出
-	output: 'export',
+	// 静态导出：本地/非 Vercel 构建（如 Netlify 发布 `out`）仍用 export。
+	// Vercel 构建会设置 VERCEL=1，此处关闭 export，才能部署 Route Handler（如 /api/visits）。
+	...(process.env.VERCEL ? {} : { output: 'export' }),
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
