@@ -15,14 +15,15 @@
 - **产出**: 可导出静态页面，支持 RSS 订阅
 
 ### 快速上手
-1. 安装依赖并启动开发：
-   - `npm run dev` 启动开发环境
-   - `npm run build` 构建生产环境
-   - `npm run start` 本地运行生产构建（默认端口 3003）
+1. 安装依赖并启动开发（[pnpm](https://pnpm.io/)，版本见 `package.json` 的 `packageManager`）：
+   - `pnpm install` 安装依赖
+   - `pnpm run dev` 启动开发环境
+   - `pnpm run build` 构建生产环境
+   - `pnpm run start` 本地运行生产构建（默认端口 3003）
 
 2. 同步文章与生成 RSS：
-   - `npm run sync-post`：从 GitHub Issues 拉取并生成/更新/删除 `data/blog` 下的文章
-   - `npm run generate-rss`：生成 RSS 输出
+   - `pnpm run sync-post`：从 GitHub Issues 拉取并生成/更新/删除 `data/blog` 下的文章
+   - `pnpm run generate-rss`：生成 RSS 输出
 
 3. 静态产物本地预览：
-   - `npm run start:static` 在本地以静态站点方式预览 `out` 目录内容
+   - `pnpm run start:static` 在本地以静态站点方式预览 `out` 目录内容

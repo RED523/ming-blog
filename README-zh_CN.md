@@ -2,16 +2,11 @@
 
 ## 开始使用
 
-首先，运行开发服务器：
+首先安装依赖并运行开发服务器：
 
 ```bash
-npm run dev
-# 或者
-yarn dev
-# 或者
+pnpm install
 pnpm dev
-# 或者
-bun dev
 ```
 
 在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看结果。
@@ -70,11 +65,11 @@ steps: 定义任务中的步骤。
 Checkout 🛎️: 使用 actions/checkout@v2 动作将仓库代码检出到工作目录。
 Git config 🔧: 配置 Git 用户信息，以便后续提交代码。
 Display runtime info ✨: 打印当前工作目录，用于调试。
-Install 🔧: 使用 yarn 安装项目的依赖包。
-Update blog files ⛏️: 执行 yarn sync-post 命令同步博客文章到仓库，然后使用 Git 添加更改、提交更改并推送到远程仓库。
+Install 🔧: 使用 pnpm 安装项目的依赖包。
+Update blog files ⛏️: 执行 pnpm run sync-post 命令同步博客文章到仓库，然后使用 Git 添加更改、提交更改并推送到远程仓库。
 总结:
 
-该工作流程通过监听 GitHub 仓库中的 issue 事件来触发博客文章同步操作。当 issue 被创建、关闭、重命名、添加或移除标签、重新打开或代码被修改时，工作流程会自动执行 yarn sync-post 命令同步博客文章到仓库，并提交更改。
+该工作流程通过监听 GitHub 仓库中的 issue 事件来触发博客文章同步操作。当 issue 被创建、关闭、重命名、添加或移除标签、重新打开或代码被修改时，工作流程会自动执行 pnpm run sync-post 命令同步博客文章到仓库，并提交更改。
 
 ## TODO
 
