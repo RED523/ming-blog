@@ -1,3 +1,4 @@
+import { FooterVisitCounter } from '@/components/FooterVisitCounter';
 import { PeekabooLink } from '@/components/links/PeekabooLink';
 import siteMetadata from '@/config/site';
 import Link from 'next/link';
@@ -55,9 +56,7 @@ export function Footer() {
 						</div>
 					</Container.Inner>
 					<Container.Inner className="mt-6">
-						<div className="flex flex-col items-center justify-start gap-2 sm:flex-row">
-							欢迎 👏🏻 你的访问
-						</div>
+						<FooterVisitCounter />
 					</Container.Inner>
 				</div>
 			</Container.Outer>

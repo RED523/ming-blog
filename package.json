@@ -41,6 +41,7 @@
 		"@radix-ui/react-toast": "^1.2.1",
 		"@radix-ui/react-tooltip": "^1.1.2",
 		"@splinetool/react-spline": "^4.0.0",
+		"@upstash/redis": "^1.37.0",
 		"class-variance-authority": "^0.7.0",
 		"client-only": "^0.0.1",
 		"clsx": "^2.1.1",
