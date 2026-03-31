@@ -1,7 +1,8 @@
 ## 项目简介
 
 ### 预览
-访问地址：[`https://keteng-blog.netlify.app/`](https://keteng-blog.netlify.app/)
+
+访问地址：[`https://keteng-blog.vercel.app/`](https://keteng-blog.vercel.app/)
 
 ![Demo 动画](/public/demo.gif)
 

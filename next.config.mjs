@@ -1,11 +1,8 @@
 import { withContentlayer } from 'next-contentlayer';
 // import generate from './scripts/generate-rss.js';
 /** @type {import('next').NextConfig} */
-// 本地 pnpm build 仍用静态 export（生成 out/）；带服务端运行时的部署需关闭 export 才能包含 Route Handler（/api/visits）。
-// - Vercel：构建时自动设置 VERCEL
-// - Netlify：构建时自动设置 NETLIFY=true（见 Netlify 只读环境变量文档）
-const deployWithServerRuntime =
-	Boolean(process.env.VERCEL) || process.env.NETLIFY === 'true';
+// 本地 pnpm build 使用静态 export（生成 out/）；Vercel 部署时自动设置 VERCEL 环境变量，关闭静态导出以支持 Route Handler（/api/visits）。
+const deployWithServerRuntime = Boolean(process.env.VERCEL);
 
 const nextConfig = {
 	...(deployWithServerRuntime ? {} : { output: 'export' }),
