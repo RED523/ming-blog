@@ -66,14 +66,23 @@ jobs:
           git add . && \
           git commit -m 'chore(ci): blog sync'
 
-      - name: Pull latest changes from remote
-        run: git pull --rebase origin main
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          commit-message: 'chore(ci): blog sync'
+          branch: bot/blog-sync
+          delete-branch: true
+          title: '[Bot] Blog Content Sync'
+          body: |
+            ## 🤖 自动博客内容同步
 
-      - name: Push changes to remote
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ secrets.GH_USER }}/${{ secrets.GH_PROJECT_NAME }}.git"
-          git push
+            此 PR 由 GitHub Actions 自动生成，包含博客内容的最新更新。
+
+            ### 变更来源
+            - Issue 事件触发：opened, closed, edited, renamed, labeled, unlabeled, reopened
+
+            ### 检查清单
+            - [ ] RSS 文件生成正常
+            - [ ] 文章内容格式正确
+            - [ ] 无敏感信息泄露
