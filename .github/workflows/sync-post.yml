@@ -19,7 +19,8 @@ on:
 
 permissions:
   contents: write
-  
+  pull-requests: write
+
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
   GH_USER: ${{ secrets.GH_USER }}
@@ -29,12 +30,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup Node.js 🚀
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20.11.0' # 指定具体的版本号
+          node-version: '20.11.0'
 
       - name: Git config 🔧
         run: |
@@ -46,9 +49,9 @@ jobs:
           echo '当前目录：'
           pwd
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 9.6.0 # 或者您想要使用的 pnpm 版本
+          version: 9.6.0
 
       - name: Install 🔧
         run: pnpm install
@@ -67,7 +70,7 @@ jobs:
           git commit -m 'chore(ci): blog sync'
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GH_TOKEN }}
           commit-message: 'chore(ci): blog sync'
