@@ -4,7 +4,7 @@
         <description><![CDATA[嘿，大家好，我是柯腾，一名前端开发者。在这里，我将记录我的学习笔记、项目经验、对前端技术的见解以及一些日常生活。希望通过这个平台，与更多志同道合的朋友交流，共同成长！]]></description>
         <link>https://keteng-blog.netlify.app</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 03 Apr 2026 07:09:37 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 06 May 2026 08:53:04 GMT</lastBuildDate>
         <atom:link href="https://keteng-blog.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
             <title><![CDATA[一文简单入门 Axios]]></title>
@@ -30,6 +30,11 @@
             <title><![CDATA[前端包管理器深度剖析]]></title>
             <link>https://keteng-blog.netlify.app/posts/post-18</link>
             <guid isPermaLink="true">https://keteng-blog.netlify.app/posts/post-18</guid>
+        </item>
+        <item>
+            <title><![CDATA[每天被短视频偷走时间？我做了个会“打断你分心”的 Chrome 插件：PauseCat]]></title>
+            <link>https://keteng-blog.netlify.app/posts/post-22</link>
+            <guid isPermaLink="true">https://keteng-blog.netlify.app/posts/post-22</guid>
         </item>
         <item>
             <title><![CDATA[“Script error.”的产生原因和解决办法]]></title>
